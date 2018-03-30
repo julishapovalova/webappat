@@ -1,25 +1,26 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertEquals;
+import pages.LoginPage;
+import pages.MainPage;
 
 public class LoginPageTests extends BaseTests {
 
-    @Test
-    public void goToLoginPage() {
-        WebDriver currentDriver = driver.getInstance();
-        String title = currentDriver.getTitle();
+    @DataProvider(name = "users", parallel = true)
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"bqa10", "p"},
+                {"bqa9", "p"}
+        };
+    }
 
-        Assert.assertTrue(title.contains("Вход"));
+    @Test(dataProvider = "users")
+    public void canLogin(String email, String password) {
+        System.out.println("Tests " + Thread.currentThread().getId());
+        MainPage mainPage = new LoginPage(driver.getInstance())
+                .open()
+                .login(email, password);
 
-        currentDriver.findElement(By.cssSelector("*[data-at=at-mailtbx]")).sendKeys("bqa10");
-        currentDriver.findElement(By.cssSelector("*[data-at=at-passtbx]")).sendKeys("p");
-        currentDriver.findElement(By.cssSelector("*[data-at=at-loginbtn]")).click();
-
-        driver.wait.until(ExpectedConditions.textToBe(By.cssSelector("*[data-at=at-emailtxt]"), "bqa10"));
+        driver.wait.until(ExpectedConditions.textToBe(mainPage.username(), email));
     }
 }

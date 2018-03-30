@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="All suite"  thread-count="2" data-provider-thread-count="2">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+    <test name="Can Login" parallel="methods">
+        <classes>
+            <class name="LoginPageTests"/>
+        </classes>
+    </test>
+</suite>

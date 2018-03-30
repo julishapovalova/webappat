@@ -31,11 +31,10 @@ public class FireFoxDriver extends Driver {
         capabilities = DesiredCapabilities.firefox();
         System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
         driver = new FirefoxDriver();
-
         driver.manage().timeouts().implicitlyWait(implicitlyWait, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
 
-        wait=new WebDriverWait(driver,explicityWait);
+        wait = new WebDriverWait(driver, explicityWait);
         driver.manage().window().maximize();
         driver.get(EnvironmentProperties.getProperty("URL"));
     }

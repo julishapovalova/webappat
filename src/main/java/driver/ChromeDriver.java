@@ -13,7 +13,7 @@ public class ChromeDriver extends Driver {
     private DesiredCapabilities capabilities;
 
     @Override
-    public WebDriver getInstance() {
+    public  WebDriver getInstance() {
         if (driver == null) {
             initChrome();
         }
@@ -28,6 +28,8 @@ public class ChromeDriver extends Driver {
         capabilities = DesiredCapabilities.chrome();
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new org.openqa.selenium.chrome.ChromeDriver();
+        System.out.println("initiate browser " + Thread.currentThread().getId());
+
         driver.manage().timeouts().implicitlyWait(implicitlyWait, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
 
