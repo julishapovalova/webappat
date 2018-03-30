@@ -1,8 +1,8 @@
-*.idea
-*.iml
+.idea
+.iml
 target/
-*.log
+.log
 build/
 target/
 test-output/
-.idea/
+.idea/workspace.xml
