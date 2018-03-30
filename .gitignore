@@ -4,3 +4,5 @@ target/
 *.log
 build/
 target/
+test-output/
+.idea/
