@@ -1,3 +1,4 @@
+import driver.DriverFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,10 +18,10 @@ public class LoginPageTests extends BaseTests {
     @Test(dataProvider = "users")
     public void canLogin(String email, String password) {
         System.out.println("Tests " + Thread.currentThread().getId());
-        MainPage mainPage = new LoginPage(driver.getInstance())
+        MainPage mainPage = new LoginPage(DriverFactory.getInstance().getDriver())
                 .open()
                 .login(email, password);
 
-        driver.wait.until(ExpectedConditions.textToBe(mainPage.username(), email));
+        DriverFactory.getInstance().wait.until(ExpectedConditions.textToBe(mainPage.username(), email));
     }
 }

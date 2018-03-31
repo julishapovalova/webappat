@@ -14,12 +14,17 @@ public class FireFoxDriver extends Driver {
     private WebDriver driver;
     private DesiredCapabilities capabilities;
 
+    public FireFoxDriver() {
+        initFireFox();
+    }
+
     @Override
-    public WebDriver getInstance() {
-        if (driver == null) {
-            initFireFox();
-        }
+    public WebDriver getDriver() {
         return driver;
+    }
+
+    public void close() {
+        driver.quit();
     }
 
     private void initFireFox() {

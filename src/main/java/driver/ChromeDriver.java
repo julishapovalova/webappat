@@ -12,12 +12,18 @@ public class ChromeDriver extends Driver {
     private WebDriver driver;
     private DesiredCapabilities capabilities;
 
+
+    ChromeDriver() {
+        initChrome();
+    }
+
     @Override
-    public  WebDriver getInstance() {
-        if (driver == null) {
-            initChrome();
-        }
+    public WebDriver getDriver() {
         return driver;
+    }
+
+    public void close() {
+        driver.quit();
     }
 
     private void initChrome() {
@@ -33,7 +39,7 @@ public class ChromeDriver extends Driver {
         driver.manage().timeouts().implicitlyWait(implicitlyWait, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
 
-        wait=new WebDriverWait(driver,explicityWait);
+        wait = new WebDriverWait(driver, explicityWait);
 
         driver.manage().window().maximize();
         driver.get(EnvironmentProperties.getProperty("URL"));

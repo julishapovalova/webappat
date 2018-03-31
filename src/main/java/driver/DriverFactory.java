@@ -6,29 +6,27 @@ public class DriverFactory {
 
     private static final ThreadLocal<Driver> DRIVER = new ThreadLocal<Driver>();
 
-    public static synchronized Driver getInstance(BrowserTypes type) {
-        switch (type) {
-            case CHROME:
-                DRIVER.set(new ChromeDriver());
-                return DRIVER.get();
-            case FIREFOX:
-                if (DRIVER.get() == null) {
-                    DRIVER.set(new FireFoxDriver());
-                }
-                return DRIVER.get();
-        }
-        return null;
-    }
-
-
-    public static Driver getDriver() {
+    public static Driver getInstance() {
         return DRIVER.get();
     }
 
-    public void remove() {
-        if (DRIVER.get() != null) {
-            DRIVER.remove();
+    public static void inititateDriver(BrowserTypes browser) {
+        if (DRIVER.get() == null) {
+            switch (browser) {
+                case CHROME:
+                    DRIVER.set(new ChromeDriver());
+                    break;
+                case FIREFOX:
+                    DRIVER.set(new FireFoxDriver());
+                    break;
+            }
         }
     }
 
+    public static void removeDriver() {
+     //   if (DRIVER.get() == null) {
+            DRIVER.get().close();
+            DRIVER.remove();
+    //    }
+    }
 }
