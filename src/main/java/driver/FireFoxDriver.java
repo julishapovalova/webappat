@@ -1,8 +1,8 @@
 package driver;
 
-import driver.propeprties.EnvironmentProperties;
+import driver.propeprties.EnivormentProperties;
+import driver.propeprties.InstanceProperties;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,9 +28,9 @@ public class FireFoxDriver extends Driver {
     }
 
     private void initFireFox() {
-        long implicitlyWait = Long.valueOf(EnvironmentProperties.getProperty("implicitly_Wait_FIREFOX"));
-        long pageLoadTimeout = Long.valueOf(EnvironmentProperties.getProperty("page_Load_Timeout"));
-        long explicityWait = Long.valueOf(EnvironmentProperties.getProperty("explicity_Wait_FIREFOX"));
+        long implicitlyWait = Long.valueOf(InstanceProperties.getProperty("implicitly_Wait_FIREFOX"));
+        long pageLoadTimeout = Long.valueOf(InstanceProperties.getProperty("page_Load_Timeout"));
+        long explicityWait = Long.valueOf(InstanceProperties.getProperty("explicity_Wait_FIREFOX"));
 
 
         capabilities = DesiredCapabilities.firefox();
@@ -41,6 +41,6 @@ public class FireFoxDriver extends Driver {
 
         wait = new WebDriverWait(driver, explicityWait);
         driver.manage().window().maximize();
-        driver.get(EnvironmentProperties.getProperty("URL"));
+        driver.get(EnivormentProperties.getProperty("URL"));
     }
 }

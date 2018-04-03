@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class EnvironmentProperties {
+public class InstanceProperties {
 
     private static Properties prop;
 
-    private EnvironmentProperties() {
+    private InstanceProperties() {
     }
 
     private static void init(String configName) {
@@ -23,7 +23,7 @@ public class EnvironmentProperties {
 
     public static String getProperty(String propertyName) {
         if (prop == null) {
-            init("src/test/resources/properties/instance.properties");
+            init("src/main/resources/driver/instance.properties");
         }
         return prop.getProperty(propertyName);
     }

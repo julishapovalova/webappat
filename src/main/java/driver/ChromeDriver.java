@@ -1,6 +1,8 @@
 package driver;
 
-import driver.propeprties.EnvironmentProperties;
+import driver.propeprties.EnivormentProperties;
+import driver.propeprties.EnivormentTypes;
+import driver.propeprties.InstanceProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,9 +29,9 @@ public class ChromeDriver extends Driver {
     }
 
     private void initChrome() {
-        long implicitlyWait = Long.valueOf(EnvironmentProperties.getProperty("implicitly_Wait_CHROME"));
-        long pageLoadTimeout = Long.valueOf(EnvironmentProperties.getProperty("page_Load_Timeout"));
-        long explicityWait = Long.valueOf(EnvironmentProperties.getProperty("explicity_Wait_CHROME"));
+        long implicitlyWait = Long.valueOf(InstanceProperties.getProperty("implicitly_Wait_CHROME"));
+        long pageLoadTimeout = Long.valueOf(InstanceProperties.getProperty("page_Load_Timeout"));
+        long explicityWait = Long.valueOf(InstanceProperties.getProperty("explicity_Wait_CHROME"));
 
         capabilities = DesiredCapabilities.chrome();
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
@@ -42,6 +44,6 @@ public class ChromeDriver extends Driver {
         wait = new WebDriverWait(driver, explicityWait);
 
         driver.manage().window().maximize();
-        driver.get(EnvironmentProperties.getProperty("URL"));
+        driver.get(EnivormentProperties.getProperty("URL"));
     }
 }
