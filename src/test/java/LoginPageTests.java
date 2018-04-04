@@ -1,4 +1,5 @@
 import driver.DriverFactory;
+import driver.propeprties.EnivormentProperties;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -10,9 +11,9 @@ public class LoginPageTests extends BaseTests {
 
     @DataProvider(name = "users", parallel = true)
     public Object[][] loginData() {
+
         return new Object[][]{
-                {"bqa10", "p"},
-                {"bqa9", "p"}
+                {EnivormentProperties.getProperty("email"), EnivormentProperties.getProperty("password")}
         };
     }
 
@@ -23,7 +24,6 @@ public class LoginPageTests extends BaseTests {
                 .open()
                 .login(email, password);
 
-     //   Assert.assertEquals(mainPage.getUsername().trim(),email);
         DriverFactory.getInstance().wait.until(ExpectedConditions.textToBe(mainPage.username(), email));
     }
 }
